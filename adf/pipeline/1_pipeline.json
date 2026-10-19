@@ -79,6 +79,9 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/dev/data-enginnering-7-11/adb/one.txt"
+				},
 				"linkedServiceName": {
 					"referenceName": "databricks_link_7_11",
 					"type": "LinkedServiceReference"
