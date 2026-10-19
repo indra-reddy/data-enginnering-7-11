@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "dev-7-11-adf"
+		},
+		"adls_link_serivce_accountKey": {
+			"value": ""
+		},
+		"adls_link_serivce_properties_typeProperties_url": {
+			"value": "https://devadls711.dfs.core.windows.net/"
+		}
+	}
+}
