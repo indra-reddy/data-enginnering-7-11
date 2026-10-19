@@ -11,9 +11,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'adls_link_serivce'"
 		},
+		"databricks_link_7_11_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'databricks_link_7_11'"
+		},
 		"adls_link_serivce_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://devadls711.dfs.core.windows.net/"
+		},
+		"databricks_link_7_11_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1019-022056-nps05z1e"
 		}
 	},
 	"variables": {
@@ -33,6 +41,24 @@
 						"type": "SecureString",
 						"value": "[parameters('adls_link_serivce_accountKey')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/databricks_link_7_11')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-7405607642868704.4.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('databricks_link_7_11_accessToken')]"
+					},
+					"existingClusterId": "[parameters('databricks_link_7_11_properties_typeProperties_existingClusterId')]"
 				}
 			},
 			"dependsOn": []
@@ -142,6 +168,33 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Notebook1",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "Copy data1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/dev/data-enginnering-7-11/adb/one.txt"
+						},
+						"linkedServiceName": {
+							"referenceName": "databricks_link_7_11",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -150,7 +203,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]"
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
+				"[concat(variables('factoryId'), '/linkedServices/databricks_link_7_11')]"
 			]
 		}
 	]

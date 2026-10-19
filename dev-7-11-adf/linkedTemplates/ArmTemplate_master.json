@@ -11,9 +11,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'adls_link_serivce'"
 		},
+		"databricks_link_7_11_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'databricks_link_7_11'"
+		},
 		"adls_link_serivce_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://devadls711.dfs.core.windows.net/"
+		},
+		"databricks_link_7_11_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1019-022056-nps05z1e"
 		},
 		"containerUri": {
 			"type": "string",
@@ -45,8 +53,14 @@
 					"adls_link_serivce_accountKey": {
 						"value": "[parameters('adls_link_serivce_accountKey')]"
 					},
+					"databricks_link_7_11_accessToken": {
+						"value": "[parameters('databricks_link_7_11_accessToken')]"
+					},
 					"adls_link_serivce_properties_typeProperties_url": {
 						"value": "[parameters('adls_link_serivce_properties_typeProperties_url')]"
+					},
+					"databricks_link_7_11_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('databricks_link_7_11_properties_typeProperties_existingClusterId')]"
 					}
 				}
 			},
